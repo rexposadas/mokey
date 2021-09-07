@@ -18,7 +18,7 @@ func New(input string) *Lexer {
 func (l *Lexer) NextToken() token.Token {
 	var tok token.Token
 
-	l.skipWhitespace()
+	l.skipWhitespace() // ignore white space and move on to the next character.
 
 	switch l.ch {
 	case '=':
@@ -116,6 +116,7 @@ func (l *Lexer) readIdentifier() string {
 	return l.input[position:l.position]
 }
 
+// note: reads only integers and not floats. this is for simplicity
 func (l *Lexer) readNumber() string {
 	position := l.position
 	for isDigit(l.ch) {
