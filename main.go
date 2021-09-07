@@ -1,29 +1,20 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"log"
 	"os"
+	"os/user"
+
+	"github.com/rexposadas/monkey/repl"
 )
 
 func main() {
-	log.Printf("running")
-
-	file, err := os.Open("sample.yn")
+	user, err := user.Current()
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-	// optionally, resize scanner's capacity for lines over 64K, see next example
-	for scanner.Scan() {
-		fmt.Println(scanner.Text())
-	}
-
-	if err := scanner.Err(); err != nil {
-		log.Fatal(err)
-	}
-
+	fmt.Printf("Hello %s! This is the Monkey programming language!\n",
+		user.Username)
+	fmt.Printf("Feel free to type in commands\n")
+	repl.Start(os.Stdin, os.Stdout)
 }
