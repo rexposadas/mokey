@@ -93,6 +93,11 @@ func (rs *ReturnStatement) String() string {
 	return out.String()
 }
 
+// An Expression Statement that consists solely of one expression.
+//
+// Example:
+// 	x + 10;
+//
 type ExpressionStatement struct {
 	Token      token.Token // the first token of the expression
 	Expression Expression
